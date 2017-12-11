@@ -3,4 +3,4 @@
 	url = https://android.googlesource.com/platform/frameworks/opt/inputmethodcommon
 [submodule "LatinIME"]
 	path = LatinIME
-	url = https://android.googlesource.com/platform/packages/inputmethods/LatinIME
+	url = https://github.com/ColinKinloch/LatinIME.git
