@@ -1,6 +1,8 @@
 [submodule "inputmethodcommon"]
 	path = inputmethodcommon
 	url = https://github.com/LineageOS/android_frameworks_opt_inputmethodcommon.git
+	branch = stable/cm-13.0-ZNH5Y
 [submodule "LatinIME"]
 	path = LatinIME
 	url = https://github.com/LineageOS/android_packages_inputmethods_LatinIME.git
+	branch = stable/cm-13.0-ZNH5Y
