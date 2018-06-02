@@ -4,7 +4,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.1'
+    classpath 'com.android.tools.build:gradle:3.1.0'
   }
 }
 
@@ -19,7 +19,6 @@ apply plugin: "com.android.application"
 
 android {
   compileSdkVersion 27
-  buildToolsVersion "26.0.2"
 
   defaultConfig {
     applicationId "com.android.inputmethod.latin"
@@ -49,9 +48,16 @@ android {
       path "LatinIME/native/jni/Android.mk"
     }
   }
+  defaultConfig {
+    externalNativeBuild {
+      ndkBuild {
+        cFlags "-w"
+      }
+    }
+  }
 }
 
 dependencies {
   implementation 'com.google.code.findbugs:jsr305:+'
-  implementation 'com.android.support:support-v4:+'
+  implementation 'com.android.support:support-v4:27.1.0'
 }
