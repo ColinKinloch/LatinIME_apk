@@ -22,6 +22,7 @@ android {
 
   defaultConfig {
     applicationId "com.android.inputmethod.latin"
+    // applicationIdSuffix ".apk"
     minSdkVersion 15
     targetSdkVersion 27
     versionCode 1
@@ -51,6 +52,7 @@ android {
   defaultConfig {
     externalNativeBuild {
       ndkBuild {
+        // Suppress build failing warnings from dependencies
         cFlags "-w"
       }
     }
