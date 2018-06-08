@@ -7,6 +7,8 @@ variables:
 
 before_script:
   - apt update && apt upgrade -y && apt install -y curl bsdtar && rm -rf /var/lib/apt/lists/*
+  - mkdir -p /opt/android-sdk
+  - mkdir -p /opt/android-ndk
   - curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip | bsdtar -xvpf- -C /opt/android-sdk
   - curl https://dl.google.com/android/repository/android-ndk-r17-linux-x86_64.zip | bsdtar -xvpf- -C /opt/android-ndk
   - export ANDROID_SDK_HOME="/opt/android-sdk/tools"
