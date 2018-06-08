@@ -11,13 +11,13 @@ before_script:
   - mkdir -p /opt/android-ndk
   - curl https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip | bsdtar -xvpf- -C /opt/android-sdk
   - curl https://dl.google.com/android/repository/android-ndk-r17-linux-x86_64.zip | bsdtar -xvpf- -C /opt/android-ndk
-  - export ANDROID_SDK_HOME="/opt/android-sdk/tools"
+  - export ANDROID_SDK_HOME="/opt/android-sdk"
   - export ANDROID_HOME="$ANDROID_SDK_HOME"
   - export NDK_HOME="/opt/android-ndk/android-ndk-r17"
   - export ANDROID_NDK="$NDK_HOME"
   - export ANDROID_NDK_HOME="$NDK_HOME"
   - export ANDROID_NDK_ROOT="$NDK_HOME"
-  - ${ANDROID_HOME}/tools/sdkmanager "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}"
+  - ${ANDROID_HOME}/tools/bin/sdkmanager "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}"
 
 stages:
   - build
