@@ -6,6 +6,7 @@ cache:
     - .gradle/caches
     - android-sdk
     - android-ndk
+    - /var/cache/apt
 
 variables:
   ANDROID_COMPILE_SDK: "27"
@@ -21,13 +22,11 @@ before_script:
   - mkdir -p $PWD/android-ndk
   - >
     if [ ! -d "./android-sdk/bin" ]; then
-      curl https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip
-      | bsdtar -xpf- -C $PWD/android-sdk
+      curl https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip | bsdtar -xpf- -C $PWD/android-sdk
     ; fi
   - >
     if [ ! -d "./android-sdk/bin" ]; then
-      curl https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip
-      | bsdtar -xpf- -C $PWD/android-ndk
+      curl https://dl.google.com/android/repository/android-ndk-r${ANDROID_NDK_VERSION}-linux-x86_64.zip | bsdtar -xpf- -C $PWD/android-ndk
     ; fi
   - export ANDROID_SDK_HOME="$PWD/android-sdk"
   - export ANDROID_HOME="$ANDROID_SDK_HOME"
