@@ -13,3 +13,7 @@ TARGET_BUILD_APPS=true ./gradlew assembleDebug
 ```
 
 The apk will be output to `./build/outputs/apk/debug/LatinIME-debug.apk`
+
+## Caveats
+This cannot be installed if an application with the id
+"com.android.inputmethod.latin" is already installed on the device.
