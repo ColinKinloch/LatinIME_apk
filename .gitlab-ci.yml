@@ -1,42 +1,41 @@
 image: openjdk:8-jdk
 
-cache:
-  key: bu
-  paths:
-    - .gradle
-    - android-sdk
-
 variables:
   ANDROID_COMPILE_SDK: "27"
-  ANDROID_BUILD_TOOLS: "27.0.0"
   ANDROID_SDK_TOOLS: "27.0.3"
   ANDROID_SDK_VERSION: "3859397"
   ANDROID_NDK_VERSION: "17"
   GIT_SUBMODULE_STRATEGY: recursive
 
+cache:
+  key: "s${ANDROID_SDK_VERSION}-n${ANDROID_NDK_VERSION}"
+  paths:
+  - .gradle
+  - android-sdk
+
 before_script:
-  - apt update && apt upgrade -y && apt install -y curl bsdtar make file && rm -rf /var/lib/apt/lists/*
-  - mkdir -p $PWD/android-sdk
-  - if [ ! -d "./android-sdk/bin" ]; then curl https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip | bsdtar -xpf- -C $PWD/android-sdk ; fi
-  - export ANDROID_SDK_HOME="$PWD/android-sdk"
-  - export ANDROID_HOME="$ANDROID_SDK_HOME"
-  - export NDK_HOME="$ANDROID_SDK_HOME/ndk-bundle"
-  - export ANDROID_NDK="$NDK_HOME"
-  - export ANDROID_NDK_HOME="$NDK_HOME"
-  - export ANDROID_NDK_ROOT="$NDK_HOME"
-  - export PATH="${ANDROID_SDK_HOME}/tools/bin:${ANDROID_SDK_HOME}/platform-tools:${ANDROID_NDK_HOME}:${PATH}"
-  - chmod -R 777 ${ANDROID_HOME}
-  - echo y | sdkmanager "ndk-bundle" "build-tools;${ANDROID_SDK_TOOLS}" "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}"
+- apt update && apt upgrade -y && apt install -y curl bsdtar make file && rm -rf /var/lib/apt/lists/*
+- mkdir -p $PWD/android-sdk
+- if [ ! -d "./android-sdk/bin" ]; then curl https://dl.google.com/android/repository/sdk-tools-linux-${ANDROID_SDK_VERSION}.zip | bsdtar -xpf- -C $PWD/android-sdk ; fi
+- export ANDROID_SDK_HOME="$PWD/android-sdk"
+- export ANDROID_HOME="$ANDROID_SDK_HOME"
+- export NDK_HOME="$ANDROID_SDK_HOME/ndk-bundle"
+- export ANDROID_NDK="$NDK_HOME"
+- export ANDROID_NDK_HOME="$NDK_HOME"
+- export ANDROID_NDK_ROOT="$NDK_HOME"
+- export PATH="${ANDROID_SDK_HOME}/tools/bin:${ANDROID_SDK_HOME}/platform-tools:${ANDROID_NDK_HOME}:${PATH}"
+- chmod -R 777 ${ANDROID_HOME}
+- echo y | sdkmanager "ndk-bundle" "build-tools;${ANDROID_SDK_TOOLS}" "platform-tools" "platforms;android-${ANDROID_COMPILE_SDK}"
 
 stages:
-  - build
+- build
 
 build:
   stage: build
   script:
-    # Disable Host Tests with TARGET_BUILD_APPS=true
-    # LineageOS/android_packages_inputmethods_LatinIME/native/jni/HostUnitTests.mk#L16
-    - TARGET_BUILD_APPS=true ./gradlew assembleDebug
+  # Disable Host Tests with TARGET_BUILD_APPS=true
+  # LineageOS/android_packages_inputmethods_LatinIME/native/jni/HostUnitTests.mk#L16
+  - TARGET_BUILD_APPS=true ./gradlew assembleDebug
   artifacts:
     paths:
     - build/outputs/
